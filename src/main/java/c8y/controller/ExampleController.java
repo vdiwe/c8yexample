@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import c8y.service.ExampleService;
 
+
 /**
  * This is an example controller. This should be removed for your real project!
  * 
