@@ -7,19 +7,20 @@
 
 	<groupId>cumulocity.microservice</groupId>
 	<artifactId>c8yexample</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1023.0.5-SNAPSHOT</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>17</java.version>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
 		<junit.version>4.13.1</junit.version>
-		<spring-boot-dependencies.version>2.5.4</spring-boot-dependencies.version>
-		<c8y.version>1015.334.0</c8y.version>
-		<microservice.name>hellovachas</microservice.name>
+		<spring-boot-dependencies.version>2.7.17</spring-boot-dependencies.version>
+		<c8y.version>1020.97.0</c8y.version>
+		<microservice.name>hello</microservice.name>
 		<c8y.docker.skip>false</c8y.docker.skip>
+		<springdoc-openapi.version>1.8.0</springdoc-openapi.version>
 	</properties>
 
 	<dependencyManagement>
@@ -31,10 +32,26 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>com.amazonaws</groupId>
+				<artifactId>aws-java-sdk-bom</artifactId>
+				<version>1.11.1000</version>
+				<type>pom</type>
+				<scope>import</scope>
+			  </dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>2.6.0</version> <!-- Use the latest version available -->
+		</dependency>
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-s3</artifactId>
+		  </dependency>
 		<dependency>
 			<groupId>com.nsn.cumulocity.clients-java</groupId>
 			<artifactId>microservice-autoconfigure</artifactId>
@@ -56,7 +73,26 @@
 			<scope>runtime</scope>
 		</dependency>
 		 -->
-
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>${springdoc-openapi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-security</artifactId>
+			<version>${springdoc-openapi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-javadoc</artifactId>
+			<version>${springdoc-openapi.version}</version>
+		</dependency>
+		<!--<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+			<version>2.5.0</version>
+		</dependency>--> 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -74,8 +110,17 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>2.22</version>
+        </dependency>
 	</dependencies>
-
 	<build>
 		<resources>
 			<resource>
@@ -85,6 +130,15 @@
 					<include>**/application*.properties</include>
 					<include>**/application.properties</include>
 					<include>**/banner.txt</include>
+					<include>**/*.json</include>
+					<include>**/*.txt</include>
+				</includes>
+			</resource>
+			<resource>
+			<directory>${basedir}/src/main/resources/subtenant</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.json</include>
 				</includes>
 			</resource>
 		</resources>

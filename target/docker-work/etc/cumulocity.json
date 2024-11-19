@@ -1,0 +1,55 @@
+{
+	"apiVersion": "2",
+	"version": "1023.0.5-SNAPSHOT",
+	"provider": {
+		"name": "Cumulocity GmbH"
+	},
+	"isolation": "MULTI_TENANT",
+	"resources": {
+        "cpu": "1",
+        "memory": "512M"
+    },
+	"requiredRoles":["ROLE_MEASUREMENT_READ",
+	"ROLE_EVENT_READ",
+	"ROLE_ALARM_READ",
+	"ROLE_MEASUREMENT_ADMIN",
+	"ROLE_EVENT_ADMIN",
+	"ROLE_ALARM_ADMIN",
+   "ROLE_INVENTORY_READ",
+   "ROLE_INVENTORY_CREATE",
+   "ROLE_INVENTORY_ADMIN",
+   "ROLE_IDENTITY_READ",
+   "ROLE_IDENTITY_ADMIN",
+   "ROLE_AUDIT_READ",
+   "ROLE_AUDIT_ADMIN",
+   "ROLE_TENANT_MANAGEMENT_READ",
+   "ROLE_TENANT_MANAGEMENT_ADMIN",
+   "ROLE_OPTION_MANAGEMENT_READ",
+   "ROLE_OPTION_MANAGEMENT_ADMIN",
+   "ROLE_NOTIFICATION_2_ADMIN",
+   "ROLE_APPLICATION_MANAGEMENT_READ",
+   "ROLE_APPLICATION_MANAGEMENT_ADMIN",
+	"ROLE_USER_MANAGEMENT_ADMIN",
+	"ROLE_USER_MANAGEMENT_READ"],
+   "roles":[
+	   "ROLE_HELLO-_READ",
+	   "ROLE_HELLO-_ADMIN",
+	   "ROLE_HELLO-_CREATE"
+   ],
+	"livenessProbe": {
+		"httpGet": {
+			"path": "/health",
+			"port": 80
+		},
+		"initialDelaySeconds": 30,
+		"periodSeconds": 10
+	},
+	"readinessProbe": {
+		"httpGet": {
+			"path": "/health",
+			"port": 80
+		},
+		"initialDelaySeconds": 30,
+		"periodSeconds": 10
+	}
+}

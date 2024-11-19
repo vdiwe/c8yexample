@@ -8,6 +8,6 @@
                                                                   
 Version (${microservice.version})
 
- :: Cumulocity Microservices SDK (1015.334.0) ::                                                                                                                
+ :: Cumulocity Microservices SDK (1020.97.0) ::                                                                                                                
  :: Spring Boot${spring-boot.formatted-version} ::
  
